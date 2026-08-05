@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teal & Pearl — The House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#221d18;
+  --paper:#fbf7f0;
+  --linen:#f4ede0;
+  --teal:#22443f;
+  --teal-deep:#152f2b;
+  --clay:#a3603f;
+  --clay-dim:#c99b7c;
+  --stone:#d8cdba;
+  --line: rgba(34,29,24,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Jost', sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  font-weight:300;
+  letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+}
+.serif{font-family:'Fraunces', serif;}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;width:100%;}
+
+/* ===== NAV ===== */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(251,247,240,0.9);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:22px 5vw;}
+.logo{display:flex;align-items:center;justify-self:center;}
+.logo img{height:38px;width:auto;display:block;}
+nav.nav-left ul, nav.nav-right ul{display:flex;gap:32px;list-style:none;align-items:center;}
+nav.nav-left{justify-self:start;}
+nav.nav-right{justify-self:end;}
+nav a{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);position:relative;padding-bottom:4px;display:inline-flex;align-items:center;gap:6px;}
+nav a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--clay);transition:width .35s ease;}
+nav a:hover::after{width:100%;}
+.nav-home-icon{width:14px;height:14px;flex:none;}
+.mobile-toggle{display:none;background:none;border:none;font-size:1.3rem;color:var(--teal-deep);cursor:pointer;}
+@media(max-width:1024px){
+  nav.nav-left, nav.nav-right{display:none;}
+  .mobile-toggle{display:block;justify-self:end;}
+  .nav-row{grid-template-columns:auto 1fr auto;}
+}
+.mobile-menu{max-height:0;overflow:hidden;background:var(--paper);display:flex;flex-direction:column;transition:max-height .35s ease;}
+.mobile-menu.open{max-height:260px;border-top:1px solid var(--line);}
+.mobile-menu a{padding:16px 6vw;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--line);}
+@media(min-width:1025px){.mobile-menu{display:none !important;}}
+
+/* ===== HERO — brand statement, not slider ===== */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--linen);}
+.hero-bg{position:absolute;inset:0;background-image:url('730496416_18084202844438936_7253942324330525540_n.jpg');background-size:cover;background-position:top center;}
+.hero-inner{position:relative;z-index:2;text-align:left;color:var(--ink);padding:0 6vw;max-width:640px;margin-right:auto;}
+.hero-inner .kicker{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--clay);margin-bottom:28px;text-shadow:0 1px 16px rgba(251,247,240,0.95), 0 1px 3px rgba(251,247,240,0.95);}
+.hero-inner h1{font-family:'Fraunces',serif;font-weight:400;font-style:italic;font-size:clamp(2.2rem,6vw,4.6rem);line-height:1.15;margin-bottom:30px;color:var(--ink);text-shadow:0 2px 26px rgba(251,247,240,0.95), 0 1px 4px rgba(251,247,240,0.95), 0 0 2px rgba(251,247,240,0.95);}
+.hero-inner p{font-size:.95rem;line-height:1.8;color:#2b271f;font-weight:400;max-width:48ch;margin:0 0 40px;text-shadow:0 1px 18px rgba(251,247,240,0.95), 0 1px 3px rgba(251,247,240,0.95);}
+.hero-cta{display:inline-flex;gap:14px;align-items:center;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--teal-deep);color:var(--teal-deep);padding:16px 34px;transition:background .3s, color .3s;}
+.hero-cta:hover{background:var(--teal-deep);color:var(--paper);}
+.hero-scroll{position:absolute;bottom:36px;left:6vw;z-index:2;color:rgba(34,29,24,0.5);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;}
+.hero-scroll::after{content:'';display:block;width:1px;height:44px;background:rgba(34,29,24,0.3);margin:12px 0 0;}
+
+/* ===== PHILOSOPHY — subtle, single light panel with quiet inline stats ===== */
+.philosophy{
+  background:var(--linen);
+  padding:130px 6vw 90px;
+  text-align:center;
+}
+.phil-main{max-width:760px;margin:0 auto 90px;}
+.phil-main .kicker{font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;color:var(--clay-dim);margin-bottom:26px;}
+.phil-main blockquote{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.4rem,2.6vw,2rem);
+  line-height:1.65;color:var(--teal);
+}
+.phil-main blockquote em{font-style:italic;color:var(--clay);}
+.phil-main cite{display:block;margin-top:28px;font-style:normal;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);opacity:.4;}
+
+.phil-stats{
+  max-width:840px;margin:0 auto;
+  display:flex;justify-content:center;
+  border-top:1px solid var(--line);
+}
+.phil-stat{
+  flex:1;padding:38px 20px 0;
+  border-right:1px solid var(--line);
+}
+.phil-stat:last-child{border-right:none;}
+.phil-stat .num{
+  display:block;font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+  font-size:clamp(1.3rem,2vw,1.7rem);color:var(--clay);margin-bottom:8px;
+}
+.phil-stat .label{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);opacity:.5;line-height:1.5;}
+@media(max-width:700px){
+  .phil-stats{flex-wrap:wrap;}
+  .phil-stat{flex:1 1 50%;border-right:none;border-bottom:1px solid var(--line);padding-bottom:24px;}
+}
+
+/* ===== RANGE — handful of pieces, alternating full-bleed rows ===== */
+.range-head{text-align:center;padding:150px 6vw 90px;}
+.range-head .kicker{font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;color:var(--clay);margin-bottom:22px;}
+.range-head h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,4vw,3rem);color:var(--teal-deep);max-width:16ch;margin:0 auto;line-height:1.2;}
+
+.piece{display:grid;grid-template-columns:1.15fr 1fr;min-height:88vh;}
+.piece.rev{grid-template-columns:1fr 1.15fr;}
+.piece.rev .piece-media{order:2;}
+.piece.rev .piece-copy{order:1;}
+@media(max-width:900px){
+  .piece, .piece.rev{grid-template-columns:1fr;min-height:auto;}
+  .piece.rev .piece-media, .piece.rev .piece-copy{order:initial;}
+}
+.piece-media{position:relative;overflow:hidden;background:var(--stone);min-height:60vh;}
+.piece-media img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.piece-copy{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:8vw 6vw;background:var(--linen);
+}
+.piece-copy .index{font-family:'Fraunces',serif;font-style:italic;font-size:.85rem;color:var(--clay);margin-bottom:20px;}
+.piece-copy h3{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--teal-deep);margin-bottom:22px;line-height:1.2;}
+.piece-copy p{font-size:.9rem;line-height:1.9;color:#5c5346;max-width:40ch;margin-bottom:30px;}
+.piece-details{display:flex;flex-direction:column;gap:10px;margin-bottom:34px;}
+.piece-details span{font-size:.78rem;color:var(--ink);opacity:.7;}
+.piece-details span b{color:var(--teal-deep);opacity:1;font-weight:500;}
+.piece-cta{display:inline-flex;width:fit-content;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid var(--teal-deep);padding-bottom:4px;color:var(--teal-deep);}
+
+/* ===== TEXTURE STRIP — macro fabric close-ups ===== */
+.texture-strip{display:grid;grid-template-columns:repeat(4,1fr);}
+@media(max-width:820px){.texture-strip{grid-template-columns:repeat(2,1fr);}}
+.texture-strip .tex{position:relative;aspect-ratio:1/1.15;overflow:hidden;}
+.texture-strip .tex img{width:100%;height:100%;object-fit:cover;}
+.texture-strip .tex::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg, rgba(21,47,43,.35), transparent 45%);}
+.texture-strip .tex span{
+  position:absolute;bottom:14px;left:14px;color:var(--paper);z-index:2;
+  font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+}
+
+/* ===== VISIT / MAP ===== */
+.visit{display:grid;grid-template-columns:1fr 1fr;min-height:70vh;}
+@media(max-width:900px){.visit{grid-template-columns:1fr;}}
+.visit-copy{
+  display:flex;flex-direction:column;justify-content:center;padding:8vw 6vw;
+  background:var(--teal-deep);color:var(--paper);
+}
+.visit-copy .kicker{font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--clay-dim);margin-bottom:22px;}
+.visit-copy h2{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1.3;margin-bottom:24px;}
+.visit-copy p{font-size:.88rem;line-height:1.85;color:rgba(251,247,240,0.72);max-width:38ch;margin-bottom:28px;}
+.visit-copy .addr{font-size:.85rem;line-height:1.8;margin-bottom:30px;}
+.visit-copy .addr b{display:block;color:var(--clay-dim);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;}
+.visit-cta{display:inline-flex;width:fit-content;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(251,247,240,0.4);padding:15px 30px;transition:background .3s;}
+.visit-cta:hover{background:rgba(251,247,240,0.08);}
+.visit-map{position:relative;overflow:hidden;min-height:50vh;background:var(--linen);padding:18px;}
+.visit-map iframe{width:100%;height:100%;border:0;border-radius:2px;}
+
+/* ===== FOOTER (reused style) ===== */
+.foot-logo-img img{height:34px;filter:invert(1) brightness(1.9);}
+footer{background:#1b1712;color:rgba(251,247,240,0.85);padding:90px 5vw 0;}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.2fr;gap:50px;padding-bottom:64px;border-bottom:1px solid rgba(251,247,240,.14);}
+@media(max-width:1024px){.foot-top{grid-template-columns:1fr 1fr;}}
+.foot-brand .logo{color:var(--paper);margin-bottom:16px;text-align:left;}
+.foot-brand p{font-size:.84rem;line-height:1.7;color:rgba(251,247,240,.65);max-width:30ch;margin-bottom:22px;}
+.foot-social{display:flex;gap:14px;}
+.foot-social a{width:34px;height:34px;border:1px solid rgba(251,247,240,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;transition:border-color .25s, background .25s;}
+.foot-social a:hover{border-color:var(--clay-dim);background:rgba(251,247,240,.06);}
+footer h5{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--clay-dim);margin-bottom:20px;}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+footer ul a{font-size:.85rem;color:rgba(251,247,240,.78);}
+footer ul a:hover{color:var(--paper);}
+.foot-newsletter p{font-size:.84rem;line-height:1.7;color:rgba(251,247,240,.65);margin-bottom:18px;}
+.foot-newsletter form{display:flex;border-bottom:1px solid rgba(251,247,240,.35);padding-bottom:10px;}
+.foot-newsletter input{background:none;border:none;outline:none;color:var(--paper);font-family:'Jost',sans-serif;font-size:.82rem;flex:1;padding:4px 0;}
+.foot-newsletter input::placeholder{color:rgba(251,247,240,.45);}
+.foot-newsletter button{background:none;border:none;color:var(--clay-dim);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;}
+.foot-payments{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.foot-payments span{font-size:.62rem;letter-spacing:.05em;color:rgba(251,247,240,.55);border:1px solid rgba(251,247,240,.25);padding:5px 9px;border-radius:3px;}
+.foot-bottom{padding:26px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.7rem;color:rgba(251,247,240,.45);border-top:1px solid rgba(251,247,240,.1);}
+.foot-credit{text-align:center;padding:18px 5vw 26px;font-size:.7rem;letter-spacing:.04em;color:rgba(251,247,240,.4);border-top:1px solid rgba(251,247,240,.08);}
+.foot-credit a{color:var(--clay-dim);border-bottom:1px solid rgba(201,155,124,.4);padding-bottom:1px;transition:color .2s, border-color .2s;}
+.foot-credit a:hover{color:var(--paper);border-color:var(--paper);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-row">
+    <nav class="nav-left"><ul>
+      <li><a href="#top"><svg class="nav-home-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg>Home</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#range">The Range</a></li>
+    </ul></nav>
+    <div class="logo"><a href="#top"><img src="logo.png" alt="Teal & Pearl — Designed for Her"></a></div>
+    <nav class="nav-right"><ul>
+      <li><a href="#visit">Visit</a></li>
+      <li><a href="https://www.instagram.com/teal.and.pearl/" target="_blank">Instagram</a></li>
+    </ul></nav>
+    <button class="mobile-toggle" id="mobileToggle">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#story">Our Story</a>
+    <a href="#range">The Range</a>
+    <a href="#visit">Visit</a>
+    <a href="https://www.instagram.com/teal.and.pearl/" target="_blank">Instagram</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="kicker">Erbil, Iraq — Est. Small Batch</div>
+    <h1 class="serif">A house built on<br>fewer, better things.</h1>
+    <p>We don't chase seasons. Teal &amp; Pearl designs a small, considered range of modest ready-to-wear — cut from weighted fabrics, finished by hand, made to be worn for years, not weeks.</p>
+    <a href="#range" class="hero-cta">Explore the Range</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<section class="philosophy">
+  <div class="phil-main">
+    <div class="kicker">Our Philosophy</div>
+    <blockquote>"We would rather make <em>twelve pieces</em> we're proud of than a hundred we're not. Every silhouette earns its place in the range — or it doesn't ship."</blockquote>
+    <cite>— The Teal &amp; Pearl Atelier</cite>
+  </div>
+  <div class="phil-stats">
+    <div class="phil-stat"><span class="num serif">06</span><span class="label">Pieces in the Range</span></div>
+    <div class="phil-stat"><span class="num serif">100%</span><span class="label">Small-Batch Made</span></div>
+    <div class="phil-stat"><span class="num serif">01</span><span class="label">Atelier, in Erbil</span></div>
+    <div class="phil-stat"><span class="num serif">∞</span><span class="label">Seasons We Ignore</span></div>
+  </div>
+</section>
+
+<section class="range-head" id="range">
+  <div class="kicker">The Range</div>
+  <h2 class="serif">Six pieces, worn a hundred ways.</h2>
+</section>
+
+<div class="piece">
+  <div class="piece-media"><img src="742077534_18085705214438936_3467199303509775678_n.jpg" alt="Sage Pleated Abaya"></div>
+  <div class="piece-copy">
+    <div class="index serif">01 — Sage</div>
+    <h3 class="serif">The Pleated Abaya</h3>
+    <p>Pin-tucked by hand across the bodice, finished with balloon sleeves and a self-belt that gathers the fullness of the skirt at the waist.</p>
+    <div class="piece-details">
+      <span>Fabric — <b>Brushed viscose twill</b></span>
+      <span>Fit — <b>Floor-length, relaxed through the body</b></span>
+      <span>Made — <b>Erbil atelier, made to order</b></span>
+    </div>
+    <a href="#visit" class="piece-cta">Enquire About This Piece →</a>
+  </div>
+</div>
+
+<div class="piece rev">
+  <div class="piece-media"><img src="730496416_18084202844438936_7253942324330525540_n.jpg" alt="Pearl Collar Gown"></div>
+  <div class="piece-copy">
+    <div class="index serif">02 — Camel</div>
+    <h3 class="serif">The Pearl Collar Gown</h3>
+    <p>Our most requested piece. Hand-beaded pearl work traces a stand collar above a gown that pools like liquid — worn dressed up or entirely undone.</p>
+    <div class="piece-details">
+      <span>Fabric — <b>Crinkle satin</b></span>
+      <span>Detail — <b>Hand-beaded stand collar</b></span>
+      <span>Colours — <b>Taupe, Camel, Sage</b></span>
+    </div>
+    <a href="#visit" class="piece-cta">Enquire About This Piece →</a>
+  </div>
+</div>
+
+<div class="piece">
+  <div class="piece-media"><img src="654469303_18101401294742105_7854066366879452364_n.jpg" alt="Camel Double-Breasted Suit"></div>
+  <div class="piece-copy">
+    <div class="index serif">03 — Camel</div>
+    <h3 class="serif">The Relaxed Suit</h3>
+    <p>A double-breasted blazer cut with room to move, paired with a wide, uncreased trouser. Built for the woman who wants tailoring without the stiffness.</p>
+    <div class="piece-details">
+      <span>Fabric — <b>Structured wool-blend</b></span>
+      <span>Fit — <b>Oversized, relaxed shoulder</b></span>
+      <span>Colours — <b>Camel, Noir, Cocoa</b></span>
+    </div>
+    <a href="#visit" class="piece-cta">Enquire About This Piece →</a>
+  </div>
+</div>
+
+<div class="piece rev">
+  <div class="piece-media"><img src="742418052_18085803731438936_1339440082352916435_n.jpg" alt="Noir Utility Set"></div>
+  <div class="piece-copy">
+    <div class="index serif">04 — Noir</div>
+    <h3 class="serif">The Utility Set</h3>
+    <p>Contrast-stitched, drawstring-waisted, endlessly practical — a jacket that reads as outerwear but layers as easily as a shirt.</p>
+    <div class="piece-details">
+      <span>Fabric — <b>Washed cotton twill</b></span>
+      <span>Detail — <b>Contrast topstitch, drawstring waist</b></span>
+      <span>Made — <b>Erbil atelier, made to order</b></span>
+    </div>
+    <a href="#visit" class="piece-cta">Enquire About This Piece →</a>
+  </div>
+</div>
+
+<div class="piece">
+  <div class="piece-media"><img src="478599315_18035424365438936_1076716845349501271_n.jpg" alt="Cocoa Teddy Jacket"></div>
+  <div class="piece-copy">
+    <div class="index serif">05 — Cocoa</div>
+    <h3 class="serif">The Teddy Jacket</h3>
+    <p>The piece we reach for first when the weather turns. Deep-pile teddy texture, oversized fit, patch pockets built for cold hands.</p>
+    <div class="piece-details">
+      <span>Fabric — <b>Teddy-pile fleece</b></span>
+      <span>Fit — <b>Oversized, collared</b></span>
+      <span>Colours — <b>Cocoa, Mauve</b></span>
+    </div>
+    <a href="#visit" class="piece-cta">Enquire About This Piece →</a>
+  </div>
+</div>
+
+<div class="piece rev">
+  <div class="piece-media"><img src="476725054_18034930064438936_328021378790708401_n.jpg" alt="Ivory Belted Trench"></div>
+  <div class="piece-copy">
+    <div class="index serif">06 — Ivory</div>
+    <h3 class="serif">The Belted Trench</h3>
+    <p>Longline, double-breasted, self-belted at the waist — the coat that closes out every season and opens the next one.</p>
+    <div class="piece-details">
+      <span>Fabric — <b>Wool-blend twill</b></span>
+      <span>Fit — <b>Longline, A-line skirt</b></span>
+      <span>Colours — <b>Ivory, Stone, Charcoal, Blush</b></span>
+    </div>
+    <a href="#visit" class="piece-cta">Enquire About This Piece →</a>
+  </div>
+</div>
+
+<div class="texture-strip">
+  <div class="tex"><img src="741092631_18085705181438936_8325561694711174741_n.jpg" alt="Fabric detail"><span>Brushed Twill</span></div>
+  <div class="tex"><img src="730452766_18084203642438936_5124487837484646547_n.jpg" alt="Fabric detail"><span>Pearl Beading</span></div>
+  <div class="tex"><img src="479302961_18035424878438936_2892863758905150331_n.jpg" alt="Fabric detail"><span>Teddy Pile</span></div>
+  <div class="tex"><img src="475338907_18033793205438936_4115994802161334514_n.jpg" alt="Fabric detail"><span>Wool Twill</span></div>
+</div>
+
+<section class="visit" id="visit">
+  <div class="visit-copy">
+    <div class="kicker">Visit The Atelier</div>
+    <h2 class="serif">Come see it, touch it,<br>try it on.</h2>
+    <p>Our fittings are unhurried and by appointment — message us on Instagram or call ahead, and we'll have the range ready for you.</p>
+    <div class="addr">
+      <b>Address</b>
+      53XC+9MR, Koya St<br>Erbil, Erbil Governorate, Iraq
+    </div>
+    <a href="https://www.google.com/maps/place/Teal+and+pearl/@36.1984949,44.0691494,17z/data=!4m6!3m5!1s0x4007210056a0295b:0xf316cf7bf2b7c956!8m2!3d36.1984949!4d44.0717243!16s%2Fg%2F11z7s76cpf?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="visit-cta">Get Directions →</a>
+  </div>
+  <div class="visit-map">
+    <iframe src="https://www.google.com/maps?q=Teal+and+pearl,+Koya+St,+Erbil&z=16&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-top">
+    <div class="foot-brand">
+      <div class="logo foot-logo-img"><img src="logo.png" alt="Teal & Pearl"></div>
+      <p>Modest ready-to-wear, designed and finished in Erbil. A small range, made to last.</p>
+      <div class="foot-social">
+        <a href="https://www.instagram.com/teal.and.pearl/" target="_blank" aria-label="Instagram">IG</a>
+        <a href="tel:+9647512324400" aria-label="Call">☎</a>
+        <a href="https://www.google.com/maps/place/Teal+and+pearl/@36.1984949,44.0691494,17z/data=!4m6!3m5!1s0x4007210056a0295b:0xf316cf7bf2b7c956!8m2!3d36.1984949!4d44.0717243!16s%2Fg%2F11z7s76cpf" target="_blank" aria-label="Map">⚲</a>
+      </div>
+    </div>
+    <div>
+      <h5>The Range</h5>
+      <ul>
+        <li><a href="#range">Pleated Abaya</a></li>
+        <li><a href="#range">Pearl Collar Gown</a></li>
+        <li><a href="#range">Relaxed Suit</a></li>
+        <li><a href="#range">Utility Set</a></li>
+        <li><a href="#range">Teddy Jacket</a></li>
+        <li><a href="#range">Belted Trench</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>The House</h5>
+      <ul>
+        <li><a href="#story">Our Philosophy</a></li>
+        <li><a href="#">Fabric &amp; Care</a></li>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Wholesale Enquiries</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Client Care</h5>
+      <ul>
+        <li><a href="tel:+9647512324400">+964 751 232 4400</a></li>
+        <li><a href="https://www.instagram.com/teal.and.pearl/" target="_blank">Message on Instagram</a></li>
+        <li><a href="https://www.google.com/maps/place/Teal+and+pearl/@36.1984949,44.0691494,17z/data=!4m6!3m5!1s0x4007210056a0295b:0xf316cf7bf2b7c956!8m2!3d36.1984949!4d44.0717243!16s%2Fg%2F11z7s76cpf" target="_blank">53XC+9MR, Koya St<br>Erbil, Erbil Governorate<br>Iraq</a></li>
+        <li>By appointment, Sat–Thu</li>
+      </ul>
+    </div>
+    <div class="foot-newsletter">
+      <h5>Stay in Touch</h5>
+      <p>Range updates and studio notes, sent occasionally.</p>
+      <form onsubmit="return false;">
+        <input type="email" placeholder="Your email address">
+        <button type="submit">Join →</button>
+      </form>
+      <div class="foot-payments">
+        <span>Cash on Delivery</span>
+        <span>Bank Transfer</span>
+        <span>Visa</span>
+        <span>Mastercard</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Teal &amp; Pearl. All rights reserved.</span>
+    <span>Erbil, Iraq</span>
+  </div>
+  <div class="foot-credit">
+    Design by Manu Shukla — <a href="https://2swan.in" target="_blank" rel="noopener">2 Swan Labs</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('mobileToggle').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+</script>
+</body>
+</html>

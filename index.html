@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teal & Pearl — Modest Ready-to-Wear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c1a17;
+  --paper:#ffffff;
+  --teal-deep:#1c3436;
+  --pearl:#f4efe7;
+  --pearl-dim:#ece3d6;
+  --sand:#c8b7a0;
+  --clay:#8a6b5f;
+  --grey-line:#e6e3dc;
+  --grey-mid:#7a7772;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Jost', sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  font-weight:300;
+  letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+}
+.serif{font-family:'Fraunces', serif;}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;width:100%;}
+
+/* ===== NAV — centered logo ===== */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--grey-line);
+}
+.nav-row{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:22px 5vw;
+}
+.logo{
+  font-family:'Fraunces', serif;font-size:1.5rem;letter-spacing:.14em;
+  font-weight:400;color:var(--teal-deep);text-align:center;white-space:nowrap;
+}
+.logo span{color:var(--clay);font-style:italic;}
+nav.nav-left ul, nav.nav-right ul{display:flex;gap:30px;list-style:none;}
+nav.nav-left{justify-self:start;}
+nav.nav-right{justify-self:end;}
+nav a{
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
+  position:relative;padding-bottom:4px;
+}
+nav a::after{
+  content:'';position:absolute;left:0;bottom:0;width:0;height:1px;
+  background:var(--teal-deep);transition:width .35s ease;
+}
+nav a:hover::after{width:100%;}
+.mobile-toggle{display:none;background:none;border:none;font-size:1.3rem;color:var(--teal-deep);cursor:pointer;}
+header{overflow:visible;}
+
+/* ===== SEMICIRCLE NAV BUTTONS (shared) ===== */
+.nav-btn{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:6;
+  width:34px;height:64px;background:var(--paper);border:none;outline:none;
+  display:flex;align-items:center;cursor:pointer;
+  opacity:0;transition:opacity .25s ease, width .25s ease;
+  color:var(--teal-deep);font-size:1.1rem;
+}
+.nav-btn:focus{outline:none;}
+.nav-btn.left{left:0;border-radius:0 32px 32px 0;justify-content:flex-start;padding-left:8px;}
+.nav-btn.right{right:0;border-radius:32px 0 0 32px;justify-content:flex-end;padding-right:8px;}
+.frame:hover .nav-btn, .hero:hover .nav-btn{opacity:.92;}
+.nav-btn:hover{width:42px;}
+
+/* ===== HERO SLIDER ===== */
+.hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;background:var(--teal-deep);overflow:hidden;}
+.hero-slide{
+  position:absolute;inset:0;background-size:cover;opacity:0;
+  transition:opacity 1s ease;filter:saturate(.95) brightness(.8);
+}
+.hero-slide.active{opacity:1;}
+.hero::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg, rgba(28,52,54,.32) 0%, rgba(28,52,54,.12) 45%, rgba(18,30,31,.85) 100%);
+}
+.hero-content{
+  position:relative;z-index:2;color:var(--pearl);padding:0 5vw 6vw;width:100%;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:40px;
+}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.35em;text-transform:uppercase;color:var(--sand);margin-bottom:16px;}
+.hero h1{font-family:'Fraunces',serif;font-weight:400;font-style:italic;font-size:clamp(2.4rem,6vw,5.2rem);line-height:1.03;max-width:12ch;}
+.hero-sub{max-width:300px;font-size:.9rem;line-height:1.75;color:var(--pearl-dim);}
+.hero-sub a{border-bottom:1px solid var(--sand);padding-bottom:2px;}
+.hero .nav-btn{height:110px;width:44px;}
+.hero .nav-btn.left{border-radius:0 55px 55px 0;}
+.hero .nav-btn.right{border-radius:55px 0 0 55px;}
+.hero-dots{position:absolute;z-index:3;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:8px;}
+.hero-dots .dot{width:6px;height:6px;border-radius:50%;background:rgba(244,239,231,.5);cursor:pointer;}
+.hero-dots .dot.active{background:var(--pearl);width:20px;border-radius:3px;transition:all .3s;}
+
+/* ===== INTRO ===== */
+.intro{max-width:740px;margin:0 auto;text-align:center;padding:110px 6vw 80px;}
+.intro .eyebrow{font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;color:var(--clay);margin-bottom:22px;}
+.intro p{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.3rem,2.5vw,1.8rem);line-height:1.55;color:var(--teal-deep);}
+
+/* ===== SECTION HEAD ===== */
+.section-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding:0 5vw 34px;border-bottom:1px solid var(--grey-line);margin:0 0 56px;
+}
+.section-head h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.7rem,3vw,2.4rem);color:var(--teal-deep);}
+.section-head .count{font-size:.72rem;letter-spacing:.18em;color:var(--clay);text-transform:uppercase;}
+
+/* ===== PRODUCT GRID ===== */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:52px 30px;padding:0 5vw 40px;}
+@media(min-width:900px){ .grid{grid-template-columns:repeat(3,1fr);} }
+
+.product{cursor:pointer;}
+.frame{position:relative;aspect-ratio:3/4;background:var(--pearl-dim);overflow:hidden;border-radius:1px;}
+.frame .slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;}
+.frame .slide.active{opacity:1;}
+.frame img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.tag{
+  position:absolute;top:14px;left:14px;z-index:5;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+  background:var(--teal-deep);color:var(--pearl);padding:5px 10px;
+}
+.dots{position:absolute;left:0;right:0;bottom:12px;z-index:5;display:flex;justify-content:center;gap:6px;}
+.dot{width:5px;height:5px;border-radius:50%;background:rgba(244,239,231,.55);border:1px solid rgba(244,239,231,.85);cursor:pointer;transition:all .25s ease;}
+.dot.active{background:var(--pearl);width:16px;border-radius:3px;}
+
+.product-caption{padding-top:16px;}
+.product-caption .set-name{font-family:'Fraunces',serif;font-weight:500;font-size:1.05rem;color:var(--teal-deep);margin-bottom:5px;}
+.product-caption .set-desc{font-size:.78rem;color:#5a5650;line-height:1.5;max-width:30ch;margin-bottom:8px;}
+.product-caption .set-price{font-size:.8rem;color:var(--clay);letter-spacing:.03em;}
+
+/* ===== EDITORIAL BAND (between rows) ===== */
+.editorial{position:relative;margin:90px 0;height:66vh;min-height:460px;display:flex;align-items:center;overflow:hidden;}
+.editorial-bg{position:absolute;inset:0;background-size:cover;}
+.editorial::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg, rgba(28,52,54,.72) 0%, rgba(28,52,54,.08) 62%);}
+.editorial-text{position:relative;z-index:2;color:var(--pearl);padding:0 6vw;max-width:520px;}
+.editorial-text .eyebrow{font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--sand);margin-bottom:18px;}
+.editorial-text h2{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(1.7rem,3.4vw,2.7rem);line-height:1.22;margin-bottom:20px;}
+.editorial-text p{font-size:.88rem;line-height:1.8;color:var(--pearl-dim);max-width:38ch;}
+
+/* ===== 3-COLUMN SERVICES ===== */
+.services{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--grey-line);border-bottom:1px solid var(--grey-line);margin-top:20px;}
+@media(max-width:820px){.services{grid-template-columns:1fr;}}
+.service{padding:64px 5vw;border-right:1px solid var(--grey-line);text-align:center;}
+.service:last-child{border-right:none;}
+.service .num{font-family:'Fraunces',serif;font-style:italic;font-size:.85rem;color:var(--sand);display:block;margin-bottom:14px;}
+.service h4{font-family:'Fraunces',serif;font-weight:500;font-size:1.15rem;color:var(--teal-deep);margin-bottom:12px;}
+.service p{font-size:.8rem;color:#5a5650;line-height:1.7;margin-bottom:16px;}
+.service a{font-size:.76rem;border-bottom:1px solid var(--teal-deep);padding-bottom:2px;color:var(--teal-deep);}
+
+/* ===== FOOTER ===== */
+footer{background:var(--teal-deep);color:var(--pearl-dim);padding:90px 5vw 0;}
+.foot-top{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.2fr;gap:50px;padding-bottom:64px;border-bottom:1px solid rgba(244,239,231,.14);
+}
+@media(max-width:1024px){.foot-top{grid-template-columns:1fr 1fr;}}
+.foot-brand .logo{color:var(--pearl);margin-bottom:16px;text-align:left;}
+.foot-brand p{font-size:.84rem;line-height:1.7;color:rgba(244,239,231,.65);max-width:30ch;margin-bottom:22px;}
+.foot-social{display:flex;gap:14px;}
+.foot-social a{
+  width:34px;height:34px;border:1px solid rgba(244,239,231,.3);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:.78rem;
+  transition:border-color .25s, background .25s;
+}
+.foot-social a:hover{border-color:var(--sand);background:rgba(244,239,231,.06);}
+footer h5{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sand);margin-bottom:20px;}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+footer ul a{font-size:.85rem;color:rgba(244,239,231,.78);}
+footer ul a:hover{color:var(--pearl);}
+.foot-newsletter p{font-size:.84rem;line-height:1.7;color:rgba(244,239,231,.65);margin-bottom:18px;}
+.foot-newsletter form{display:flex;border-bottom:1px solid rgba(244,239,231,.35);padding-bottom:10px;}
+.foot-newsletter input{
+  background:none;border:none;outline:none;color:var(--pearl);font-family:'Jost',sans-serif;
+  font-size:.82rem;flex:1;padding:4px 0;
+}
+.foot-newsletter input::placeholder{color:rgba(244,239,231,.45);}
+.foot-newsletter button{background:none;border:none;color:var(--sand);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;}
+.foot-payments{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.foot-payments span{
+  font-size:.62rem;letter-spacing:.05em;color:rgba(244,239,231,.55);
+  border:1px solid rgba(244,239,231,.25);padding:5px 9px;border-radius:3px;
+}
+.foot-bottom{
+  padding:26px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font-size:.7rem;color:rgba(244,239,231,.45);
+  border-top:1px solid rgba(244,239,231,.1);margin-top:0;
+}
+.foot-credit{
+  text-align:center;padding:18px 5vw 26px;
+  font-size:.7rem;letter-spacing:.04em;color:rgba(244,239,231,.4);
+  border-top:1px solid rgba(244,239,231,.08);
+}
+.foot-credit a{color:var(--sand);border-bottom:1px solid rgba(200,183,160,.4);padding-bottom:1px;transition:color .2s, border-color .2s;}
+.foot-credit a:hover{color:var(--pearl);border-color:var(--pearl);}
+
+/* ===== LIGHTBOX ===== */
+.lightbox{position:fixed;inset:0;z-index:300;background:rgba(20,32,33,.94);display:none;align-items:center;justify-content:center;padding:5vw;}
+.lightbox.open{display:flex;}
+.lightbox img{max-height:88vh;max-width:80vw;object-fit:contain;width:auto;}
+.lightbox-close{position:absolute;top:30px;right:5vw;color:var(--pearl);font-size:1.6rem;background:none;border:none;cursor:pointer;}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--pearl);font-size:2rem;cursor:pointer;padding:10px 18px;}
+.lb-prev{left:1vw;}.lb-next{right:1vw;}
+
+@media(max-width:1024px){
+  nav.nav-left, nav.nav-right{display:none;}
+  .mobile-toggle{display:block;justify-self:end;}
+  .nav-row{grid-template-columns:auto 1fr auto;}
+  .hero-content{flex-direction:column;align-items:flex-start;gap:24px;}
+  .grid{grid-template-columns:1fr;}
+  .foot-grid{grid-template-columns:1fr;}
+  .duo{grid-template-columns:1fr;}
+}
+@media(min-width:1025px){
+  .mobile-menu{display:none !important;}
+}
+
+.mobile-menu{
+  max-height:0;overflow:hidden;background:var(--paper);
+  border-top:0 solid var(--grey-line);
+  display:flex;flex-direction:column;
+  transition:max-height .35s ease;
+}
+.mobile-menu.open{max-height:280px;border-top:1px solid var(--grey-line);}
+.mobile-menu a{
+  padding:18px 6vw;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink);border-bottom:1px solid var(--grey-line);
+}
+
+/* ===== UNIQUE DUO SECTION (2 items, asymmetric shapes) ===== */
+.duo{
+  display:grid;grid-template-columns:1fr 1.15fr;gap:44px;
+  align-items:center;padding:0 5vw;margin:100px 0;
+}
+.duo-arch{
+  position:relative;aspect-ratio:3/4.4;overflow:hidden;
+  border-radius:280px 280px 24px 24px;
+  background:var(--pearl-dim);
+}
+.duo-arch img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.duo-panel{
+  position:relative;
+}
+.duo-panel .eyebrow{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--clay);margin-bottom:18px;}
+.duo-panel h3{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(1.6rem,3vw,2.3rem);color:var(--teal-deep);line-height:1.25;margin-bottom:18px;}
+.duo-panel p{font-size:.86rem;line-height:1.8;color:#5a5650;max-width:42ch;margin-bottom:26px;}
+.duo-shape{
+  position:relative;aspect-ratio:1/1.05;overflow:hidden;
+  clip-path:polygon(0 0,100% 0,100% 78%,50% 100%,0 78%);
+  background:var(--pearl-dim);margin-top:10px;
+}
+.duo-shape img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.duo-cta{
+  font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;
+  border-bottom:1px solid var(--teal-deep);padding-bottom:3px;color:var(--teal-deep);
+}
+
+/* ===== PEARL SPOTLIGHT (circular image, pearl bg, single teal accent) ===== */
+.spotlight{
+  background:var(--pearl);padding:100px 5vw;margin:100px 0;
+  display:grid;grid-template-columns:.85fr 1fr;gap:60px;align-items:center;
+}
+.spotlight-circle{
+  position:relative;aspect-ratio:1/1;border-radius:50%;overflow:hidden;
+  max-width:440px;justify-self:center;
+  box-shadow:0 30px 60px -20px rgba(28,52,54,0.18);
+}
+.spotlight-circle img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.spotlight-text .eyebrow{
+  font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--grey-mid);margin-bottom:18px;
+}
+.spotlight-text h3{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.7rem,3.2vw,2.5rem);color:var(--ink);
+  line-height:1.28;margin-bottom:20px;
+}
+.spotlight-text h3 em{
+  font-style:italic;color:var(--teal-deep);border-bottom:2px solid var(--teal-deep);padding-bottom:2px;
+}
+.spotlight-text p{font-size:.88rem;line-height:1.85;color:#5a5650;max-width:44ch;margin-bottom:26px;}
+.spotlight-tag{
+  display:inline-flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
+}
+.spotlight-tag::before{content:'';width:26px;height:1px;background:var(--sand);display:block;}
+
+/* ===== PEARL OFFSET TRIO ===== */
+.trio{
+  background:var(--pearl);padding:110px 5vw 90px;margin:100px 0;
+}
+.trio-head{text-align:center;max-width:600px;margin:0 auto 70px;}
+.trio-head .eyebrow{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--grey-mid);margin-bottom:16px;}
+.trio-head h3{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(1.6rem,3vw,2.3rem);color:var(--ink);}
+.trio-row{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:26px;align-items:end;}
+@media(max-width:900px){.trio-row{grid-template-columns:1fr;}}
+.trio-item{position:relative;overflow:hidden;background:var(--pearl-dim);}
+.trio-item.a{aspect-ratio:3/4;border-radius:0 120px 0 120px;}
+.trio-item.b{aspect-ratio:3/4.6;border-radius:120px 0 120px 0;transform:translateY(-30px);}
+.trio-item.c{aspect-ratio:3/4;border-radius:0 120px 0 120px;}
+@media(max-width:900px){.trio-item.b{transform:none;}}
+.trio-item img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.trio-num{
+  position:absolute;top:16px;left:16px;z-index:2;
+  font-family:'Fraunces',serif;font-style:italic;font-size:.85rem;color:var(--teal-deep);
+  background:var(--paper);width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-row">
+    <nav class="nav-left"><ul>
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#story">The House</a></li>
+    </ul></nav>
+    <div class="logo">TEAL <span>&amp;</span> PEARL</div>
+    <nav class="nav-right"><ul>
+      <li><a href="#visit">Atelier</a></li>
+      <li><a href="https://www.instagram.com/teal.and.pearl/" target="_blank">Instagram</a></li>
+    </ul></nav>
+    <button class="mobile-toggle" id="mobileToggle">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#collection">Collection</a>
+    <a href="#story">The House</a>
+    <a href="#visit">Atelier</a>
+    <a href="https://www.instagram.com/teal.and.pearl/" target="_blank">Instagram</a>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-slide active" style="background-image:url('730496416_18084202844438936_7253942324330525540_n.jpg');background-position:top center;"></div>
+  <div class="hero-slide" style="background-image:url('660126790_18118167022651387_3197932542487530301_n.jpg');background-position:top center;"></div>
+  <div class="hero-slide" style="background-image:url('654469303_18101401294742105_7854066366879452364_n.jpg');background-position:top center;"></div>
+  <div class="hero-slide" style="background-image:url('473706025_18032617076438936_127601851952771017_n.jpg');background-position:center 20%;"></div>
+  <div class="hero-slide" style="background-image:url('730277760_18084202787438936_8636667023944279179_n.jpg');background-position:top center;"></div>
+
+  <button class="nav-btn left" id="heroPrev">‹</button>
+  <button class="nav-btn right" id="heroNext">›</button>
+
+  <div class="hero-content">
+    <div>
+      <div class="hero-eyebrow">New Season — Ready to Wear</div>
+      <h1 class="serif">Quiet luxury,<br>draped in intention.</h1>
+    </div>
+    <div class="hero-sub">
+      Modest silhouettes in camel, sage and pearl — cut from liquid crinkle satin and finished by hand in our Erbil atelier. <a href="#collection">Discover the collection →</a>
+    </div>
+  </div>
+  <div class="hero-dots" id="heroDots"></div>
+</section>
+
+<section class="intro">
+  <div class="eyebrow">Est. Erbil</div>
+  <p>Every set is designed to move the way a room does at golden hour — soft, weighted, unhurried. We build in small batches, so each piece keeps its texture and its story.</p>
+</section>
+
+<section id="collection">
+  <div class="section-head">
+    <h2 class="serif">The Collection</h2>
+    <div class="count" id="setCount">Sets — AW Edit</div>
+  </div>
+  <div id="collectionBody"></div>
+</section>
+
+<div class="services">
+  <div class="service">
+    <span class="num serif">I</span>
+    <h4 class="serif">Client Care</h4>
+    <p>Speak with our team for styling advice or order support, any day of the week.</p>
+    <a href="tel:+9647512324400">+964 751 232 4400</a>
+  </div>
+  <div class="service">
+    <span class="num serif">II</span>
+    <h4 class="serif">Visit the Atelier</h4>
+    <p>53XC+9MR, Koya St, Erbil, Erbil Governorate, Iraq.</p>
+    <a href="https://www.google.com/maps/place/Teal+and+pearl/@36.1984949,44.0691494,17z/data=!4m6!3m5!1s0x4007210056a0295b:0xf316cf7bf2b7c956!8m2!3d36.1984949!4d44.0717243!16s%2Fg%2F11z7s76cpf?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank">Get Directions</a>
+  </div>
+  <div class="service">
+    <span class="num serif">III</span>
+    <h4 class="serif">Follow the House</h4>
+    <p>New sets, styling notes and behind-the-scenes from the studio floor.</p>
+    <a href="https://www.instagram.com/teal.and.pearl/" target="_blank">@teal.and.pearl</a>
+  </div>
+</div>
+
+<footer id="visit">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <div class="logo">TEAL <span>&amp;</span> PEARL</div>
+      <p>Modest ready-to-wear, designed and finished in Erbil. Considered fabrics, unhurried silhouettes, made in small batches.</p>
+      <div class="foot-social">
+        <a href="https://www.instagram.com/teal.and.pearl/" target="_blank" aria-label="Instagram">IG</a>
+        <a href="tel:+9647512324400" aria-label="Call">☎</a>
+        <a href="https://www.google.com/maps/place/Teal+and+pearl/@36.1984949,44.0691494,17z/data=!4m6!3m5!1s0x4007210056a0295b:0xf316cf7bf2b7c956!8m2!3d36.1984949!4d44.0717243!16s%2Fg%2F11z7s76cpf?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" aria-label="Map">⚲</a>
+      </div>
+    </div>
+    <div>
+      <h5>Shop</h5>
+      <ul>
+        <li><a href="#collection">New In</a></li>
+        <li><a href="#collection">Sets</a></li>
+        <li><a href="#collection">Outerwear</a></li>
+        <li><a href="#collection">Evening Gowns</a></li>
+        <li><a href="#collection">Full Collection</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>The House</h5>
+      <ul>
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#story">Fabric &amp; Care</a></li>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Shipping &amp; Returns</a></li>
+        <li><a href="#">Wholesale Enquiries</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Client Care</h5>
+      <ul>
+        <li><a href="tel:+9647512324400">+964 751 232 4400</a></li>
+        <li><a href="https://www.instagram.com/teal.and.pearl/" target="_blank">Message on Instagram</a></li>
+        <li><a href="https://www.google.com/maps/place/Teal+and+pearl/@36.1984949,44.0691494,17z/data=!4m6!3m5!1s0x4007210056a0295b:0xf316cf7bf2b7c956!8m2!3d36.1984949!4d44.0717243!16s%2Fg%2F11z7s76cpf?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank">53XC+9MR, Koya St<br>Erbil, Erbil Governorate<br>Iraq</a></li>
+        <li>Sat–Thu, 10am–7pm</li>
+      </ul>
+    </div>
+    <div class="foot-newsletter">
+      <h5>Stay in Touch</h5>
+      <p>New sets and styling notes, sent occasionally — never a flood.</p>
+      <form onsubmit="return false;">
+        <input type="email" placeholder="Your email address">
+        <button type="submit">Join →</button>
+      </form>
+      <div class="foot-payments">
+        <span>Cash on Delivery</span>
+        <span>Bank Transfer</span>
+        <span>Visa</span>
+        <span>Mastercard</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Teal &amp; Pearl. All rights reserved.</span>
+    <span>Erbil, Iraq</span>
+  </div>
+  <div class="foot-credit">
+    Design by Manu Shukla — <a href="https://2swan.in" target="_blank" rel="noopener">2 Swan Labs</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">✕</button>
+  <button class="lightbox-nav lb-prev" id="lbPrev">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lightbox-nav lb-next" id="lbNext">›</button>
+</div>
+
+<script>
+/* ---------- MOBILE MENU ---------- */
+document.getElementById('mobileToggle').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+
+/* ---------- HERO SLIDER ---------- */
+const heroSlides = document.querySelectorAll('.hero-slide');
+const heroDotsWrap = document.getElementById('heroDots');
+let heroIndex = 0, heroTimer;
+
+heroSlides.forEach((_, i) => {
+  const d = document.createElement('span');
+  d.className = 'dot' + (i===0 ? ' active' : '');
+  d.addEventListener('click', () => goToHero(i));
+  heroDotsWrap.appendChild(d);
+});
+const heroDots = heroDotsWrap.querySelectorAll('.dot');
+
+function goToHero(i){
+  heroSlides[heroIndex].classList.remove('active');
+  heroDots[heroIndex].classList.remove('active');
+  heroIndex = (i + heroSlides.length) % heroSlides.length;
+  heroSlides[heroIndex].classList.add('active');
+  heroDots[heroIndex].classList.add('active');
+}
+function nextHero(){ goToHero(heroIndex+1); }
+function prevHero(){ goToHero(heroIndex-1); }
+document.getElementById('heroNext').addEventListener('click', ()=>{ nextHero(); resetHeroTimer(); });
+document.getElementById('heroPrev').addEventListener('click', ()=>{ prevHero(); resetHeroTimer(); });
+function resetHeroTimer(){ clearInterval(heroTimer); heroTimer = setInterval(nextHero, 5500); }
+resetHeroTimer();
+
+/* ---------- PRODUCT DATA ---------- */
+const products = [
+  { tag:'Plum', name:'Plum Wrap Set', desc:'Oversized poncho top with matching wide-leg trousers, striated viscose.', price:'IQD 145,000',
+    images:['730608434_18084745703438936_4894676186544182790_n.jpg','730351001_18084745676438936_7596786412660711090_n.jpg','730892671_18084745694438936_619003974373683760_n.jpg'] },
+  { tag:'Ivory', name:'Ivory Draped Set', desc:'Satin-finish shirt with tie waist, paired with fluid wide trousers.', price:'IQD 138,000',
+    images:['730691702_18084630902438936_6128585885193762084_n.jpg','731037407_18084630872438936_6568901266997737697_n.jpg','731068170_18084630881438936_8921352581489948241_n.jpg','730786520_18084630893438936_8249240601829620750_n.jpg'] },
+  { tag:'Cocoa', name:'Cocoa Poncho Set', desc:'Textured cocoa poncho and trouser co-ord, also shown as a solo blouse.', price:'IQD 152,000',
+    images:['730812419_18084745721438936_1710023696763868575_n.jpg','730753990_18084745658438936_1936875013528321478_n.jpg','734492158_18084745667438936_7484930228585362101_n.jpg','730045704_18084630845438936_3242692466504384405_n.jpg'] },
+  { tag:'Sage', name:'Sage Pleated Abaya', desc:'Pin-tucked bodice, balloon sleeves and a belted, floor-sweeping silhouette.', price:'IQD 168,000',
+    images:['741092631_18085705181438936_8325561694711174741_n.jpg','742060276_18085705232438936_7586029259303773501_n.jpg','742077534_18085705214438936_3467199303509775678_n.jpg','733759351_18085705205438936_1682472981770353167_n.jpg'] },
+  { tag:'Noir', name:'Noir Utility Set', desc:'Contrast-stitched zip jacket with drawstring waist and matching trousers.', price:'IQD 176,000',
+    images:['742418052_18085803731438936_1339440082352916435_n.jpg','742396052_18085803722438936_4401233739569246828_n.jpg','742200212_18085803713438936_5116867996782275081_n.jpg','743589534_18085803704438936_3320864274761808244_n.jpg'] },
+  { tag:'Pearl', name:'Pearl Collar Gown — Taupe', desc:'Crinkle-satin gown with beaded stand collar and sashed waist.', price:'IQD 195,000',
+    images:['729636847_18084203660438936_2552767587146076731_n.jpg','730452766_18084203642438936_5124487837484646547_n.jpg'] },
+  { tag:'Pearl', name:'Pearl Collar Gown — Camel', desc:'The same beaded-collar silhouette in a warm camel crinkle satin.', price:'IQD 195,000',
+    images:['730496416_18084202844438936_7253942324330525540_n.jpg','729954771_18084202835438936_3449560614120454629_n.jpg','729561489_18084202808438936_507453407117631001_n.jpg','730277760_18084202787438936_8636667023944279179_n.jpg','731678904_18084202778438936_4703429882121851673_n.jpg'] },
+  { tag:'Pearl', name:'Pearl Collar Gown — Sage', desc:'A cool mint colourway of our signature beaded-collar evening gown.', price:'IQD 195,000',
+    images:['730632969_18084203150438936_7873410779468365911_n.jpg','731187632_18084203159438936_6939293222491756365_n.jpg','730816546_18084203132438936_339255195217635712_n.jpg'] },
+  { tag:'Noir', name:'Relaxed Shirt Set — Noir', desc:'Oversized collared shirt and wide trousers in structured crepe.', price:'IQD 128,000',
+    images:['729669923_18084302492438936_9136766522543153337_n.jpg','730598571_18084630860438936_3429319273326182312_n.jpg','731700453_18084631193438936_2529181907584629422_n.jpg'] },
+  { tag:'Aubergine', name:'Relaxed Shirt Set — Aubergine', desc:'The same easy silhouette in a deep aubergine crepe.', price:'IQD 128,000',
+    images:['730608315_18084302501438936_8400182330995304754_n.jpg','730893322_18084302798438936_3240666602506253324_n.jpg'] },
+  { tag:'Cocoa', name:'Cocoa Relaxed Set', desc:'Boxy button-through top and matching wide trousers in cocoa.', price:'IQD 132,000',
+    images:['730853930_18084302780438936_2221476093297157153_n.jpg','730809114_18084302771438936_3112322308908990202_n.jpg'] },
+  { tag:'Cocoa', name:'Cocoa Shirt over Ivory', desc:'The cocoa button-through shirt layered over ivory wide trousers.', price:'IQD 96,000',
+    images:['730748713_18084302762438936_7382851457868635442_n.jpg','742418052_18085803731438936_1339440082352916435_n.jpg'] },
+  { tag:'Olive', name:'Olive Utility Shirt Dress', desc:'Longline patch-pocket shirt dress in structured olive poplin.', price:'IQD 118,000',
+    images:['660126790_18118167022651387_3197932542487530301_n.jpg','657660117_18146830507470266_1213734813166367928_n.jpg'] },
+  { tag:'Ivory', name:'Ivory Oversized Shirt', desc:'Crisp oversized cotton shirt, styled over camel wide trousers.', price:'IQD 92,000',
+    images:['658059714_18316163185283961_2581799187980064924_n.jpg','670642051_18110506516631953_3133280462873661251_n.jpg'] },
+  { tag:'Camel', name:'Camel Double-Breasted Suit', desc:'Relaxed double-breasted blazer and matching wide trousers.', price:'IQD 210,000',
+    images:['654469303_18101401294742105_7854066366879452364_n.jpg','655227861_18082301429608448_3945106929363011346_n.jpg'] },
+  { tag:'Noir', name:'Noir Double-Breasted Suit', desc:'The tailored silhouette in black, worn over white and matching trousers.', price:'IQD 210,000',
+    images:['669702706_18410149315176863_5737633012925156745_n.jpg','670469752_18323258074268091_2823096693088969305_n.jpg'] },
+  { tag:'Cocoa', name:'Cocoa Double-Breasted Suit', desc:'A deep cocoa colourway of our signature relaxed suiting.', price:'IQD 210,000',
+    images:['660342733_18211781056326279_1905964605035485643_n.jpg','657876160_18578347975004206_8277455715846246174_n.jpg'] },
+  { tag:'Terrain', name:'Colourblock Windbreaker — Terrain', desc:'Cropped zip windbreaker in brown, navy and stone colourblock.', price:'IQD 134,000',
+    images:['654022855_18040853225549190_4467304890675722714_n.jpg'] },
+  { tag:'Sage', name:'Colourblock Windbreaker — Sage', desc:'The same cropped silhouette in sage, stone and taupe.', price:'IQD 134,000',
+    images:['653925406_18059447480389022_3458149777576940222_n.jpg','652797437_17963770787901822_1621520217601379261_n.jpg'] },
+  { tag:'Bordeaux', name:'Bordeaux Embroidered Knit', desc:'Oversized knit with a hand-embroidered travelling-bear motif.', price:'IQD 88,000',
+    images:['474553865_18033386402438936_8280249226293107316_n.jpg'] },
+  { tag:'Charcoal', name:'Charcoal Ribbed Knit Set', desc:'Collared V-neck knit top with matching wide-leg ribbed trousers.', price:'IQD 142,000',
+    images:['474185847_18033386393438936_2640817889365053892_n.jpg','474107559_18033386354438936_1532058815554777299_n.jpg','475411786_18033790415438936_3892566372260300590_n.jpg'] },
+  { tag:'Stone', name:'Stone Belted Trench', desc:'Double-breasted longline trench in stone wool-blend, self-belted.', price:'IQD 188,000',
+    images:['474970008_18033790373438936_1197880560859513795_n.jpg','475338907_18033793205438936_4115994802161334514_n.jpg'] },
+  { tag:'Grey', name:'Grey Belted Trench', desc:'The same longline trench silhouette in heathered grey wool.', price:'IQD 188,000',
+    images:['473706025_18032617076438936_127601851952771017_n.jpg'] },
+  { tag:'Ivory', name:'Ivory Belted Trench', desc:'Double-breasted longline trench in soft ivory wool-blend.', price:'IQD 192,000',
+    images:['476725054_18034930064438936_328021378790708401_n.jpg','477450169_18034930037438936_5766518488147780871_n.jpg'] },
+  { tag:'Charcoal', name:'Charcoal Belted Trench', desc:'Deep charcoal double-breasted trench with a printed silk headscarf pairing.', price:'IQD 192,000',
+    images:['475408410_18033793214438936_8800153006000195139_n.jpg','476511962_18034930253438936_118049713840075988_n.jpg','477060285_18034930208438936_359918524902954265_n.jpg','476900116_18034930217438936_606874727853410328_n.jpg'] },
+  { tag:'Blush', name:'Blush Belted Trench', desc:'A softer blush colourway of our longline double-breasted trench.', price:'IQD 192,000',
+    images:['476765268_18034930385438936_2607053569444662667_n.jpg','476576477_18034930340438936_5872815649116703216_n.jpg'] },
+  { tag:'Cocoa', name:'Cocoa Teddy Jacket', desc:'Oversized teddy-texture jacket in deep cocoa, collared and patch-pocketed.', price:'IQD 156,000',
+    images:['478599315_18035424365438936_1076716845349501271_n.jpg','478518020_18035424374438936_6174636329020557990_n.jpg'] },
+  { tag:'Mauve', name:'Mauve Teddy Jacket', desc:'The same cosy teddy silhouette in a soft mauve, styled with sage trousers.', price:'IQD 156,000',
+    images:['479302961_18035424878438936_2892863758905150331_n.jpg','478155290_18035424887438936_2713551029834692063_n.jpg'] },
+  { tag:'Butter', name:'Butter Wrap Dress', desc:'Crinkle-cotton wrap dress with a pleated skirt and covered button waist.', price:'IQD 124,000',
+    images:['694838271_18079904816438936_4744265926843784708_n.jpg','695772557_18079904717438936_2148045644241619468_n.jpg'] },
+  { tag:'Sage', name:'Sage Wrap Dress', desc:'The signature wrap silhouette in a cool sage crinkle-cotton.', price:'IQD 124,000',
+    images:['696513495_18079905656438936_8733573508344781700_n.jpg'] },
+  { tag:'Sky', name:'Sky Wrap Dress', desc:'A powder-blue colourway of our wrap dress, also shown across the full palette.', price:'IQD 124,000',
+    images:['696508268_18079905608438936_2531599287495398906_n.jpg','696488751_18079905587438936_8413695606260059170_n.jpg'] }
+];
+
+document.getElementById('setCount').textContent = products.length + ' Sets — AW Edit';
+
+/* ---------- BUILD GRID WITH EDITORIAL BANDS EVERY 6 ITEMS ---------- */
+const body = document.getElementById('collectionBody');
+const editorials = [
+  { bg:'742077534_18085705214438936_3467199303509775678_n.jpg', pos:'center 15%', eyebrow:'The House', title:'Cut for stillness,<br>styled for movement.', text:'Pearl-beaded collars, liquid pleats, oversized silhouettes that catch the air — designed for women who dress with quiet confidence.' },
+  { bg:'654469303_18101401294742105_7854066366879452364_n.jpg', pos:'top center', eyebrow:'Tailoring', title:'Structure, worn softly.', text:'Relaxed double-breasted suiting cut with room to move — our take on the modern tailored uniform.' },
+  { bg:'474970008_18033790373438936_1197880560859513795_n.jpg', pos:'top center', eyebrow:'Outerwear', title:'Layers for the long walk home.', text:'Belted trenches and colourblock windbreakers built for transitional weather, without losing the silhouette.' }
+];
+
+let editorialCursor = 0;
+function appendEditorial(){
+  if(editorialCursor >= editorials.length) return;
+  const e = editorials[editorialCursor++];
+  const sec = document.createElement('section');
+  sec.className = 'editorial';
+  sec.innerHTML = `
+    <div class="editorial-bg" style="background-image:url('${e.bg}');background-position:${e.pos};"></div>
+    <div class="editorial-text">
+      <div class="eyebrow">${e.eyebrow}</div>
+      <h2 class="serif">${e.title}</h2>
+      <p>${e.text}</p>
+    </div>
+  `;
+  body.appendChild(sec);
+}
+
+function appendDuo(){
+  const sec = document.createElement('section');
+  sec.className = 'duo';
+  sec.innerHTML = `
+    <div class="duo-arch"><img src="479302961_18035424878438936_2892863758905150331_n.jpg" alt="Mauve Teddy Jacket"></div>
+    <div class="duo-panel">
+      <div class="eyebrow">Cold-Weather Edit</div>
+      <h3 class="serif">Wrapped in something softer.</h3>
+      <p>Teddy-texture jackets and wool trenches for the months that ask for a little more warmth — without giving up the silhouette.</p>
+      <div class="duo-cta">Shop Outerwear →</div>
+      <div class="duo-shape"><img src="696488751_18079905587438936_8413695606260059170_n.jpg" alt="Wrap dress colour range"></div>
+    </div>
+  `;
+  body.appendChild(sec);
+}
+
+function appendSpotlight(){
+  const sec = document.createElement('section');
+  sec.className = 'spotlight';
+  sec.innerHTML = `
+    <div class="spotlight-circle"><img src="730452766_18084203642438936_5124487837484646547_n.jpg" alt="Pearl Collar Gown"></div>
+    <div class="spotlight-text">
+      <div class="eyebrow">Signature Piece</div>
+      <h3 class="serif">A collar worth <em>looking twice</em> at.</h3>
+      <p>Hand-finished pearl beading traces the stand collar of our evening gown — the one piece every client asks us to restock.</p>
+      <div class="spotlight-tag">Pearl Collar Gown, three colourways</div>
+    </div>
+  `;
+  body.appendChild(sec);
+}
+
+function appendTrio(){
+  const sec = document.createElement('section');
+  sec.className = 'trio';
+  sec.innerHTML = `
+    <div class="trio-head">
+      <div class="eyebrow">Styled Three Ways</div>
+      <h3 class="serif">One wardrobe, endless quiet mornings.</h3>
+    </div>
+    <div class="trio-row">
+      <div class="trio-item a"><span class="trio-num">1</span><img src="654469303_18101401294742105_7854066366879452364_n.jpg" alt="Camel Suit"></div>
+      <div class="trio-item b"><span class="trio-num">2</span><img src="474185847_18033386393438936_2640817889365053892_n.jpg" alt="Charcoal Knit"></div>
+      <div class="trio-item c"><span class="trio-num">3</span><img src="660126790_18118167022651387_3197932542487530301_n.jpg" alt="Olive Utility Shirt Dress"></div>
+    </div>
+  `;
+  body.appendChild(sec);
+}
+
+let grid = null;
+function newGrid(){
+  grid = document.createElement('div');
+  grid.className = 'grid';
+  body.appendChild(grid);
+}
+newGrid();
+
+const lightboxProducts = products;
+
+let interludeStep = 0;
+function appendInterlude(){
+  const type = interludeStep % 4;
+  if(type === 0) appendEditorial();
+  else if(type === 1) appendSpotlight();
+  else if(type === 2) appendDuo();
+  else appendTrio();
+  interludeStep++;
+}
+
+products.forEach((p, pi) => {
+  if(pi > 0 && pi % 6 === 0){
+    appendInterlude();
+    newGrid();
+  }
+
+  const el = document.createElement('div');
+  el.className = 'product';
+  el.innerHTML = `
+    <div class="frame">
+      <span class="tag">${p.tag}</span>
+      ${p.images.map((src,i)=>`<div class="slide ${i===0?'active':''}"><img src="${src}" alt="${p.name}" loading="lazy"></div>`).join('')}
+      ${p.images.length > 1 ? `
+      <button class="nav-btn left" data-role="prev">‹</button>
+      <button class="nav-btn right" data-role="next">›</button>
+      <div class="dots">
+        ${p.images.map((_,i)=>`<span class="dot ${i===0?'active':''}" data-i="${i}"></span>`).join('')}
+      </div>` : ''}
+    </div>
+    <div class="product-caption">
+      <div class="set-name serif">${p.name}</div>
+      <div class="set-desc">${p.desc}</div>
+      <div class="set-price">${p.price}</div>
+    </div>
+  `;
+  grid.appendChild(el);
+
+  const frame = el.querySelector('.frame');
+  const slides = frame.querySelectorAll('.slide');
+  const dots = frame.querySelectorAll('.dot');
+  let current = 0;
+  let hoverTimer = null;
+
+  function goTo(i){
+    slides[current].classList.remove('active');
+    if(dots[current]) dots[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    if(dots[current]) dots[current].classList.add('active');
+  }
+
+  /* Hover = auto-advance through images with a pause, not cursor-position based */
+  if(p.images.length > 1){
+    frame.addEventListener('mouseenter', () => {
+      hoverTimer = setInterval(() => goTo(current+1), 1200);
+    });
+    frame.addEventListener('mouseleave', () => {
+      clearInterval(hoverTimer);
+      goTo(0);
+    });
+
+    frame.querySelector('[data-role="prev"]').addEventListener('click', (e) => {
+      e.stopPropagation(); clearInterval(hoverTimer); goTo(current-1);
+    });
+    frame.querySelector('[data-role="next"]').addEventListener('click', (e) => {
+      e.stopPropagation(); clearInterval(hoverTimer); goTo(current+1);
+    });
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation(); clearInterval(hoverTimer); goTo(parseInt(dot.dataset.i));
+      });
+    });
+  }
+
+  frame.addEventListener('click', () => openLightbox(pi, current));
+});
+
+/* ---------- LIGHTBOX ---------- */
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+let lbProductIndex = 0, lbImgIndex = 0;
+
+function openLightbox(pi, ii){
+  lbProductIndex = pi; lbImgIndex = ii;
+  lbImg.src = lightboxProducts[pi].images[ii];
+  lightbox.classList.add('open');
+}
+document.getElementById('lbClose').addEventListener('click', ()=> lightbox.classList.remove('open'));
+lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) lightbox.classList.remove('open'); });
+document.getElementById('lbNext').addEventListener('click', ()=>{
+  const imgs = lightboxProducts[lbProductIndex].images;
+  lbImgIndex = (lbImgIndex+1) % imgs.length;
+  lbImg.src = imgs[lbImgIndex];
+});
+document.getElementById('lbPrev').addEventListener('click', ()=>{
+  const imgs = lightboxProducts[lbProductIndex].images;
+  lbImgIndex = (lbImgIndex-1+imgs.length) % imgs.length;
+  lbImg.src = imgs[lbImgIndex];
+});
+document.addEventListener('keydown', (e)=>{
+  if(!lightbox.classList.contains('open')) return;
+  if(e.key === 'Escape') lightbox.classList.remove('open');
+  if(e.key === 'ArrowRight') document.getElementById('lbNext').click();
+  if(e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+});
+</script>
+</body>
+</html>
